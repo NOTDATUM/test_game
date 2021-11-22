@@ -1,0 +1,36 @@
+<html>
+<head>
+<script type='text/javascript'>
+function check(value) {
+	return value;
+}
+</script>
+</head>
+<body>
+<script type='text/javascript'>
+function test( fn, context, params, eResult ) {
+	var div = document.createElement( 'div' ),
+		result = fn.apply(context, params),
+		msg = ' - name=' + fn.name + ', context=' + context + ', params=' + params + ', result=' + result + ', expect=' + eResult;
+	
+	div.style.margin = '5px 5px 5px 5px';
+	
+	if ( eResult === result ) {
+		div.style.backgroundColor = 'green';
+		div.textContent = 'SUCCESS' + msg;
+	} else {
+		div.style.backgroundColor = 'red';
+		div.textContent = 'FAIL' + msg;
+	}
+	
+	document.body.appendChild( div );
+}
+
+test(check, null, [true], true);
+test(check, null, [false], false);
+test(check, null, [1], 2);
+test(check, null, ['A'], 'B');
+// Need matcher functions -> test(check, null, ['A'], equalTo('B'));
+</script>
+</body>
+</html>
